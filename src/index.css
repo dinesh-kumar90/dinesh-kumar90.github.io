@@ -1,25 +1,20 @@
-@import url('//fonts.googleapis.com/css2?family=Acme&family=PT+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #0e1a2b;
+  background: #fff8ee;
+}
+
 body {
-  margin: 0;
-  font-family: 'PT Sans', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  @apply m-0 bg-sand font-sans text-ink;
+  background-image: radial-gradient(circle at 1px 1px, rgba(14, 26, 43, 0.08) 1px, transparent 0);
+  background-size: 24px 24px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-b,
-button,
-.heading-font {
-  font-family: 'Acme', sans-serif;
+* {
+  @apply box-border;
 }

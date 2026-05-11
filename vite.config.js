@@ -1,11 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
+  base: '/dinesh-kumar90.github.io/',
   build: {
-    outDir: './build',
+    outDir: 'build'
   },
-  plugins: [react()],
+  plugins: [react()]
 });
