@@ -1362,6 +1362,7 @@ export default function App() {
           </div>
 
           <div
+            className="flex-1 items-center justify-center flex"
             style={{
               fontFamily: "JetBrains Mono, monospace",
               fontSize: "11px",
