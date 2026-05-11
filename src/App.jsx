@@ -238,37 +238,73 @@ export default function App() {
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault();
     setSent(true);
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        access_key: "2b4f2678-f473-48ae-a720-4850e60e148e",
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      }),
+    });
+
+    const data = await response.json();
+    //setResult(data.success ? "Success!" : "Error");
     setTimeout(() => setSent(false), 3000);
     setFormData({ name: "", email: "", message: "" });
   };
 
   const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const section = document.getElementById(id);
+    if (!section) return;
+    const navOffset = 65;
+    const targetTop = section.getBoundingClientRect().top + window.scrollY - navOffset;
     setMenuOpen(false);
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: Math.max(targetTop, 0), behavior: "smooth" });
+    });
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]?.target?.id) {
-          setActiveSection(visible[0].target.id);
+    const getSections = () =>
+      NAV_LINKS.map((link) => document.getElementById(link.id)).filter(Boolean);
+
+    let ticking = false;
+    const updateActiveSection = () => {
+      const sections = getSections();
+      const offset = 140;
+      let nextActive = NAV_LINKS[0].id;
+
+      sections.forEach((section) => {
+        const top = section.offsetTop - offset;
+        if (window.scrollY >= top) {
+          nextActive = section.id;
         }
-      },
-      { threshold: [0.25, 0.5, 0.75], rootMargin: "-25% 0px -50% 0px" }
-    );
+      });
 
-    NAV_LINKS.forEach((link) => {
-      const el = document.getElementById(link.id);
-      if (el) observer.observe(el);
-    });
+      setActiveSection(nextActive);
+      ticking = false;
+    };
 
-    return () => observer.disconnect();
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateActiveSection);
+        ticking = true;
+      }
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", updateActiveSection);
+    };
   }, []);
 
   return (
@@ -612,7 +648,18 @@ export default function App() {
       </section>
 
       {/* EXPERTISE */}
-      <section id="expertise" style={{ paddingTop: "128px", paddingBottom: "128px" }}>
+      <section
+        id="expertise"
+        className="flex items-center"
+        style={{
+          minHeight: "100svh",
+          paddingTop: "128px",
+          paddingBottom: "128px",
+          background: "linear-gradient(180deg, rgba(138,235,255,0.03) 0%, rgba(11,19,38,0) 100%)",
+          borderTop: "1px solid rgba(255,255,255,0.04)",
+          borderBottom: "1px solid rgba(255,255,255,0.04)",
+        }}
+      >
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Stats */}
@@ -739,7 +786,17 @@ export default function App() {
       </section>
 
       {/* PROJECTS */}
-      <section id="projects" style={{ paddingTop: "128px", paddingBottom: "128px" }}>
+      <section
+        id="projects"
+        className="flex items-center"
+        style={{
+          minHeight: "100svh",
+          paddingTop: "128px",
+          paddingBottom: "128px",
+          background: "linear-gradient(180deg, rgba(99,102,241,0.03) 0%, rgba(11,19,38,0) 100%)",
+          borderBottom: "1px solid rgba(255,255,255,0.04)",
+        }}
+      >
         <div className="max-w-6xl mx-auto px-6">
           <FadeIn>
             <div className="text-center mb-16">
@@ -893,7 +950,17 @@ export default function App() {
       </section>
 
       {/* TIMELINE */}
-      <section id="timeline" style={{ paddingTop: "128px", paddingBottom: "128px" }}>
+      <section
+        id="timeline"
+        className="flex items-center"
+        style={{
+          minHeight: "100svh",
+          paddingTop: "128px",
+          paddingBottom: "128px",
+          background: "linear-gradient(180deg, rgba(16,185,129,0.03) 0%, rgba(11,19,38,0) 100%)",
+          borderBottom: "1px solid rgba(255,255,255,0.04)",
+        }}
+      >
         <div className="max-w-4xl mx-auto px-6">
           <FadeIn>
             <div className="text-center mb-16">
@@ -996,7 +1063,17 @@ export default function App() {
       </section>
 
       {/* STACK */}
-      <section id="stack" style={{ paddingTop: "128px", paddingBottom: "128px" }}>
+      <section
+        id="stack"
+        className="flex items-center"
+        style={{
+          minHeight: "100svh",
+          paddingTop: "128px",
+          paddingBottom: "128px",
+          background: "linear-gradient(180deg, rgba(245,158,11,0.03) 0%, rgba(11,19,38,0) 100%)",
+          borderBottom: "1px solid rgba(255,255,255,0.04)",
+        }}
+      >
         <div className="max-w-6xl mx-auto px-6">
           <FadeIn>
             <div className="text-center mb-16">
@@ -1061,7 +1138,17 @@ export default function App() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" style={{ paddingTop: "128px", paddingBottom: "128px" }}>
+      <section
+        id="contact"
+        className="flex items-center"
+        style={{
+          minHeight: "100svh",
+          paddingTop: "128px",
+          paddingBottom: "128px",
+          background: "linear-gradient(180deg, rgba(236,72,153,0.03) 0%, rgba(11,19,38,0) 100%)",
+          borderBottom: "1px solid rgba(255,255,255,0.04)",
+        }}
+      >
         <div className="max-w-2xl mx-auto px-6">
           <FadeIn>
             <div className="text-center mb-16">
