@@ -54,43 +54,55 @@ const EXPERTISE = [
     tags: ["Headless", "Shopify", "Stripe", "CDN"],
   },
 ];
-
 const PROJECTS = [
   {
-    title: "NeuralCommerce",
-    desc: "AI-driven product recommendation engine serving 2M+ daily users. Reduced cart abandonment by 34%.",
-    tags: ["GPT-4", "Node.js", "Redis", "AWS"],
-    impact: "2M+ daily users | -34% abandonment",
+    title: "ForChics",
+    desc: "Full Shopify store build for a fast-growing beauty brand. Custom theme development, speed optimisation, and upsell flows to maximise average order value.",
+    tags: ["Shopify 2.0", "Liquid", "Speed Optimisation", "Custom Theme"],
+    impact: "Full build · Core Web Vitals optimised · App-free upsells",
+    url: "https://www.forchics.com",
   },
   {
-    title: "DistributedOS",
-    desc: "Custom microservices orchestration layer handling 50K req/s across 12 services. Zero-downtime deploys.",
-    tags: ["Kubernetes", "Go", "gRPC", "Kafka"],
-    impact: "50K req/s | 12 services",
+    title: "Tipaw",
+    desc: "Complete storefront build with performance-first development. Cleaned up bloated code, lazy loaded assets, and eliminated render-blocking scripts.",
+    tags: ["Shopify", "Liquid", "AJAX API", "Performance"],
+    impact: "Full build · Page speed improved · App-free",
+    url: "https://store.tipaw.com",
   },
   {
-    title: "QuantumCart",
-    desc: "Real-time inventory sync across 300+ warehouses. Sub-100ms latency. $40M GMV processed monthly.",
-    tags: ["TypeScript", "PostgreSQL", "WebSockets", "Stripe"],
-    impact: "300+ warehouses | <100ms latency",
+    title: "Bleame",
+    desc: "Built a custom 'Build a Box' feature using JavaScript and Liquid — customers pick a box size, fill it with products, and add the bundle to cart. Zero apps.",
+    tags: ["Custom JS", "Liquid", "AJAX Cart API", "Bundles"],
+    impact: "Custom bundle flow · App-free · Higher AOV",
+    url: "https://www.bleame.com",
   },
   {
-    title: "DataSentinel",
-    desc: "ML-powered anomaly detection for payment fraud. 99.2% accuracy, saving $2M annually.",
-    tags: ["Python", "TensorFlow", "Spark", "Airflow"],
-    impact: "99.2% detection accuracy",
+    title: "Vue Swiss",
+    desc: "Shopify Plus store with a custom discount function on the Shopify Functions API — automatically applies a free gift at checkout based on cart conditions.",
+    tags: ["Shopify Plus", "Functions API", "Metaobjects", "Liquid"],
+    impact: "Free gift logic · No third-party app · Shopify Plus",
+    url: "https://www.vueswiss.com",
   },
   {
-    title: "EdgesSync",
-    desc: "Global CDN orchestration tool managing 80+ edge nodes with automated failover and geo-routing.",
-    tags: ["CloudFront", "Terraform", "Go", "Prometheus"],
-    impact: "80+ edge nodes | global failover",
+    title: "Nexus Section Library",
+    desc: "Published Shopify app that lets merchants add customisable theme sections and build landing pages, banners, and layouts without touching code.",
+    tags: ["Shopify App", "Liquid", "Theme Sections", "No-code"],
+    impact: "Live on Shopify App Store · Free to install",
+    url: "https://apps.shopify.com/nexus-section-library",
   },
   {
-    title: "VaultAuth",
-    desc: "Zero-trust identity platform with RBAC, MFA, and SSO. Serves 50K enterprise users daily.",
-    tags: ["OAuth2", "JWT", "PKCE", "Node.js"],
-    impact: "50K enterprise users/day",
+    title: "Buy Links Pro",
+    desc: "Shopify app that generates direct checkout links with automatic discounts — shareable via email, ads, or social media to reduce checkout friction.",
+    tags: ["Shopify App", "Checkout", "Discount Links", "Node.js"],
+    impact: "Live on Shopify App Store · Reduces checkout steps",
+    url: "https://apps.shopify.com/buylink-pro",
+  },
+  {
+    title: "LPG Enterprise",
+    desc: "Hub-and-spoke store syncing app that enables real-time syncing of products, inventory, orders, and fulfilments between multiple Shopify stores.",
+    tags: ["Shopify App", "Multi-store Sync", "Inventory", "Orders"],
+    impact: "Live on Shopify App Store · Enterprise-grade sync",
+    url: "https://apps.shopify.com/lpg-enterprise-partner",
   },
 ];
 
@@ -867,7 +879,7 @@ export default function App() {
                       background: `linear-gradient(90deg, transparent, rgba(138,235,255,0.4), transparent)`,
                     }}
                   />
-                  <div
+                  {/* <div
                     style={{
                       width: "36px",
                       height: "36px",
@@ -880,7 +892,7 @@ export default function App() {
                     }}
                   >
                     <Terminal size={16} style={{ color: "#8aebff" }} />
-                  </div>
+                  </div> */}
                   <h3
                     style={{
                       fontSize: "17px",
@@ -938,17 +950,17 @@ export default function App() {
                         fontFamily: "Inter, sans-serif",
                       }}
                     >
-                      {openProject === p.title ? "Hide Impact" : "Show Impact"} <ExternalLink size={12} />
+                      {openProject === p.title ? "Hide Impact" : "Show Impact"} 
                     </button>
-                    <button
-                      className="flex  items-center gap-4 text-xs text-[#475569] bg-none border-none cursor-pointer p-0"
-                      style={{
-
-                        fontFamily: "Inter, sans-serif",
-                      }}
-                    >
-                      Source Code <Github size={16} />
-                    </button>
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex items-center justify-center cursor-pointer border-none bg-none text-xs p-0 gap-4 text-[#8aebff]"
+                >
+                      {p.url ? "Visit " + p.title : "Source Code"} <ExternalLink size={12} />
+                    </a>
                   </div>
                 </motion.div>
               </FadeIn>
