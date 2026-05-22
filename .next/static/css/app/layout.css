@@ -1220,10 +1220,6 @@ video {
 .uppercase{
   text-transform: uppercase;
 }
-.text-\[\#475569\]{
-  --tw-text-opacity: 1;
-  color: rgb(71 85 105 / var(--tw-text-opacity, 1));
-}
 .text-\[\#8aebff\]{
   --tw-text-opacity: 1;
   color: rgb(138 235 255 / var(--tw-text-opacity, 1));
