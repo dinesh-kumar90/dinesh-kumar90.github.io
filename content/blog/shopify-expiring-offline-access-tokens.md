@@ -102,12 +102,13 @@ Your database schema likely stores a single `accessToken` string. With expiring 
 ```typescript
 // Example Prisma schema update
 model Session {
-  id          String   @id
-  shop        String
-  accessToken String
+  id                   String    @id
+  shop                 String
+  accessToken          String
   // Add these fields:
-  expiresAt   DateTime?
-  scope       String?
+  expires_at           DateTime?
+  refresh_token        String?
+  refresh_token_expires_at DateTime?
 }
 ```
 
